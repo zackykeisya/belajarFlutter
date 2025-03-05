@@ -7,93 +7,50 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Portfolio'),
+        title: const Text('CV Zacky Keisya Akbar'),
         backgroundColor: Colors.deepPurpleAccent,
         foregroundColor: Colors.white,
+        centerTitle: true,
+        elevation: 4,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // Profile Image
-            Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset(
-                  'assets/images/Gedung.jpg',
-                  width: 150,
-                  height: 150,
-                  fit: BoxFit.cover,
-                ),
-              ),
+            _buildProfileInfo(),
+            const SizedBox(height: 24),
+            _buildSectionTitle('Tentang Saya'),
+            _buildDescription(
+              'Saya pelajar dari SMK Wikrama Bogor jurusan Software dan Game Development. Saya ingin memperoleh pengalaman kerja melalui PKL selama 6 bulan. Saya menguasai beberapa bahasa pemrograman seperti JavaScript, PHP, dan C#. Saya juga menguasai framework seperti Tailwind CSS, Bootstrap, Laravel 10, serta micro framework seperti Lumen dan database MongoDB.',
             ),
-            const SizedBox(height: 20),
-
-            // About Me
-            _buildSectionTitle('About Me'),
-            const Text(
-              'Hello! I am Zacky Keisya Akbar, a student at SMK Wikrama Bogor. '
-              'I am passionate about technology, especially in front-end development and mobile app development.',
-              style: TextStyle(fontSize: 16, color: Colors.black87, height: 1.5),
+            const SizedBox(height: 24),
+            _buildSectionTitle('Pendidikan'),
+            _buildEducationItem(
+              title: 'SMK Wikrama Bogor (2023 - 2026)',
+              description: 'Jurusan Pengembangan Perangkat Lunak dan Gim. Mempersiapkan siswa untuk memiliki kemampuan dalam mengelola berbagai aspek teknologi dan bisnis.',
             ),
-            const SizedBox(height: 20),
-
-            // Experience
-            _buildSectionTitle('Experience'),
-            _buildListItem('📌 Student at SMK Wikrama Bogor'),
-            _buildListItem('📌 Intern at XYZ Company (2024)'),
-            _buildListItem('📌 Built multiple personal projects using Flutter and Laravel'),
-            const SizedBox(height: 20),
-
-            // Skills
-            _buildSectionTitle('Skills'),
-            Wrap(
-              spacing: 10,
-              runSpacing: 10,
-              children: [
-                _buildSkillChip('Flutter'),
-                _buildSkillChip('Dart'),
-                _buildSkillChip('Laravel'),
-                _buildSkillChip('Tailwind CSS'),
-                _buildSkillChip('Bootstrap'),
-                _buildSkillChip('JavaScript'),
-                _buildSkillChip('UI/UX Design'),
-              ],
-            ),
-            const SizedBox(height: 20),
-
-            // Projects
-            _buildSectionTitle('Projects'),
-            _buildProjectItem(
-              title: 'Rental Motor System',
-              description: 'A rental system with admin and cashier roles using Laravel 10 and Tailwind CSS.',
-            ),
-            _buildProjectItem(
-              title: 'E-commerce Website',
-              description: 'A responsive e-commerce template built with Bootstrap and Tailwind CSS.',
-            ),
-            _buildProjectItem(
-              title: 'Flutter Mobile App',
-              description: 'A mobile app built with Flutter for a school project management system.',
-            ),
+            const SizedBox(height: 24),
+            _buildSectionTitle('Proyek'),
+            _buildProjectList(),
+            const SizedBox(height: 24),
+            _buildSectionTitle('Skill'),
+            _buildSkillList(),
+            const SizedBox(height: 24),
+            _buildSectionTitle('Portofolio & LinkedIn'),
+            _buildProjectItem(title: 'Portofolio', description: 'https://sann-delta.vercel.app/'),
+            _buildProjectItem(title: 'LinkedIn', description: 'https://www.linkedin.com/in/zackykeisyaakbar/'),
             const SizedBox(height: 30),
-
-            // Back Button
             Center(
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+                onPressed: () => Navigator.pop(context),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurpleAccent,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                 ),
-                child: const Text('Back', style: TextStyle(fontSize: 16)),
+                child: const Text('Kembali', style: TextStyle(fontSize: 16)),
               ),
             ),
           ],
@@ -102,45 +59,52 @@ class DetailPage extends StatelessWidget {
     );
   }
 
-  // Section Title Widget
-  Widget _buildSectionTitle(String title) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Text(
-        title,
-        style: const TextStyle(
-          fontSize: 22,
-          fontWeight: FontWeight.bold,
-          color: Colors.deepPurpleAccent,
+  Widget _buildProfileInfo() {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      elevation: 4,
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Zacky Keisya Akbar',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.deepPurpleAccent),
+            ),
+            const SizedBox(height: 5),
+            Text('SMK Wikrama Bogor - Software dan Game Development', style: TextStyle(fontSize: 16, color: Colors.black54)),
+            const SizedBox(height: 5),
+            Text('zackykeisyaa@gmail.com | +62 838-9141-2191', style: TextStyle(fontSize: 16, color: Colors.black54)),
+          ],
         ),
       ),
     );
   }
 
-  // List Item Widget
-  Widget _buildListItem(String text) {
+  Widget _buildSectionTitle(String title) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.only(bottom: 8),
       child: Text(
-        text,
-        style: const TextStyle(fontSize: 16, color: Colors.black54),
+        title,
+        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.deepPurpleAccent),
       ),
     );
   }
 
-  // Skill Chip Widget
-  Widget _buildSkillChip(String skill) {
-    return Chip(
-      label: Text(skill),
-      backgroundColor: Colors.deepPurple.shade100,
-      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+  Widget _buildDescription(String text) {
+    return Text(
+      text,
+      style: TextStyle(fontSize: 16, color: Colors.black87, height: 1.5),
     );
   }
 
-  // Project Item Widget
+  Widget _buildEducationItem({required String title, required String description}) {
+    return _buildProjectItem(title: title, description: description);
+  }
+
   Widget _buildProjectItem({required String title, required String description}) {
     return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       elevation: 3,
       child: Padding(
@@ -150,17 +114,42 @@ class DetailPage extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.deepPurpleAccent),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.deepPurpleAccent),
             ),
             const SizedBox(height: 5),
             Text(
               description,
-              style: const TextStyle(fontSize: 14, color: Colors.black54, height: 1.4),
+              style: TextStyle(fontSize: 14, color: Colors.black54, height: 1.4),
             ),
           ],
         ),
       ),
     );
   }
-}
 
+  Widget _buildProjectList() {
+    List<Map<String, String>> projects = [
+      {'title': 'Website E-commerce', 'description': 'Dibuat menggunakan HTML & CSS.'},
+      {'title': 'Pengelolaan Data Siswa', 'description': 'Dibuat dengan PHP & Bootstrap.'},
+      {'title': 'Website Kasir Pengelola Keuangan', 'description': 'Menggunakan PHP & Bootstrap.'},
+      {'title': 'Website Pemesanan Tiket Karcis', 'description': 'Menggunakan PHP & Bootstrap.'},
+      {'title': 'Website Operasional Apotek', 'description': 'Dibangun dengan PHP, Laravel, dan Bootstrap.'},
+      {'title': 'Website Operasional Pengaduan Masyarakat', 'description': 'Dibangun dengan PHP, Laravel, dan Bootstrap.'},
+      {'title': 'Website Kelola Barang di Gudang', 'description': 'Menggunakan Lumen dan API.'},
+    ];
+    return Column(children: projects.map((p) => _buildProjectItem(title: p['title']!, description: p['description']!)).toList());
+  }
+
+  Widget _buildSkillList() {
+    List<String> skills = ['HTML', 'CSS', 'JavaScript', 'PHP', 'C#', 'Tailwind CSS', 'Bootstrap 5', 'Laravel', 'Lumen', 'MongoDB', 'ReactJS'];
+    return Wrap(
+      spacing: 10,
+      runSpacing: 10,
+      children: skills.map((skill) => _buildSkillChip(skill)).toList(),
+    );
+  }
+
+  Widget _buildSkillChip(String skill) {
+    return Chip(label: Text(skill), backgroundColor: Colors.deepPurple.shade100);
+  }
+}
